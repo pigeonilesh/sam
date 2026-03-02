@@ -92,7 +92,9 @@ namespace sam
 
         static void FightMonster(int monsterHP, int monsterAttack)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"    ============    Комната {roomNumber}: Бой с монстром     ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"На вашем пути появился монстр. У него {monsterHP} ХП и его сила атаки равна {monsterAttack}");
             Console.WriteLine();
@@ -126,6 +128,7 @@ namespace sam
                         else
                         {
                             Console.WriteLine($"Недастаточно стрел для выстрела, вы пропускаете ход.");
+                            weapon = "Меч";
                         }
                         Console.WriteLine();
                         break;
@@ -138,6 +141,7 @@ namespace sam
                         else
                         {
                             Console.WriteLine($"Зелий не осталось, вы пропускаете ход");
+                            weapon = "Меч";
                         }
                         Console.WriteLine();
                         break;
@@ -175,7 +179,9 @@ namespace sam
 
         static void OpenChest()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"    ============    Комната {roomNumber}: Сундук    ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"Вы вошли в комнату и видете перед собой сундук. Хотите открыть сундук? Да/Нет");
             string open = Console.ReadLine().ToLower().Trim();
@@ -250,7 +256,9 @@ namespace sam
 
         static void VisitMerchant()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"    ============    Комната {roomNumber}: Торговец    ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"Вам повстречался торговец");
             Console.WriteLine($"Он предлогает купить вам 1 зелье за 10 монет или 3 стрелы за 5 монет.");
@@ -318,7 +326,9 @@ namespace sam
 
         static void VisitAltar()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"    ============    Комната {roomNumber}: Алтарь    ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"Вам повстречался альтарь усиления");
             Console.WriteLine($"Вы можете пожертвовать 10 монет для усиления урона меча на 5 или восстановить 20 ХП");
@@ -391,7 +401,9 @@ namespace sam
 
         static void MeetDarkMage()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"    ============    Комната {roomNumber}: Темный маг    ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"Вам повстречался Темный маг");
             Console.WriteLine($"Маг предлагает совершить сделку: жертвуй 10 HP, чтобы получить 2 зелья и 5 стрел.");
@@ -434,7 +446,9 @@ namespace sam
 
         static void Event()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"    ============    Комната {roomNumber}: Событие    ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             int sob = r.Next(1, 4);
             switch (sob)
@@ -602,7 +616,9 @@ namespace sam
 
         static void FightBoss()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"    ============    Комната {roomNumber}: БОСС   ============    ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine($"Перед вами последняя комната, вы заходите внутрь и видете перед собой Принцессу");
             Console.WriteLine($"Вы пытаетесь с ней заговорить, но она достает огронмый топор");
@@ -640,6 +656,7 @@ namespace sam
                         else
                         {
                             Console.WriteLine($"Недастаточно стрел для выстрела, вы пропускаете ход.");
+                            weapon = "Лук";
                         }
                         Console.WriteLine();
                         break;
@@ -652,6 +669,7 @@ namespace sam
                         else
                         {
                             Console.WriteLine($"Зелий не осталось, вы пропускаете ход");
+                            weapon = "Меч";
                         }
                         Console.WriteLine();
                         break;
@@ -682,8 +700,17 @@ namespace sam
                         Console.WriteLine();
                     }
                 }
-                else if (weapon == "Лук" || weapon == "Зелье")
+                else if (weapon == "Лук")
                 {
+                    int BOSSAttack = r.Next(BOSSminAttack, BOSSmaxAttack);
+                    int halfBOSSAttack = BOSSAttack / 2;
+                    Console.WriteLine($"Принцесса кинула в вас неведимку, вы получили {halfBOSSAttack} ХП");
+                    HP -= halfBOSSAttack;
+                    Console.WriteLine($"У вас осталось {HP} ХП");
+                    Console.WriteLine();
+                }
+                else if (weapon == "Зелье")
+                { 
 
                 }
                 if (HP <= 0)
@@ -709,7 +736,9 @@ namespace sam
         {
             if (isWin)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ПОЗДРАВЛЯЕМ ВЫ ПОБЕДИЛИ  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
                 Console.WriteLine($"    ++++++    Ваше статистика     ++++++    ");
                 ShowStats();
